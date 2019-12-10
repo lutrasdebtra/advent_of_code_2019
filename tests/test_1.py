@@ -1,6 +1,5 @@
 import pytest
-from challenge_1.one import fuel_requirements
-from challenge_1.two import fuel_requirements_fuel_inclusive
+from challenge_1 import fuel_requirements, fuel_requirements_fuel_inclusive
 
 
 @pytest.mark.parametrize(

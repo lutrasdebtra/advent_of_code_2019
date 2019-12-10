@@ -1,2 +1,1 @@
-from .one import fuel_requirements
-from .two import fuel_requirements_fuel_inclusive
+from .module import fuel_requirements, fuel_requirements_fuel_inclusive

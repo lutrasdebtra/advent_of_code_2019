@@ -1,1 +1,1 @@
-from .one import run_intcode
+from .module import run_intcode

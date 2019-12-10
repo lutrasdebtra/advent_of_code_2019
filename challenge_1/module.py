@@ -1,6 +1,10 @@
 import math
 
 
+def fuel_requirements(mass):
+    return math.floor(mass / 3.0) - 2
+
+
 def fuel_requirements_fuel_inclusive(f_r):
     fuel_list = []
     while True:
