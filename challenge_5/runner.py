@@ -8,3 +8,4 @@ with open("five.txt", "r") as ins:
 program = array[0]
 
 run_intcode(program, input_=1)
+run_intcode(program, input_=5)
