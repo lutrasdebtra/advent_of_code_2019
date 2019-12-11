@@ -1,5 +1,6 @@
 from itertools import groupby
 
+
 def _check_length(num):
     return len(str(num)) == 6
 

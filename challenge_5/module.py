@@ -87,6 +87,7 @@ def process_opt_code(opt_code):
 
 def run_intcode(intcode_string, input_=None):
     instructions = [int(x) for x in intcode_string.split(',')]
+    outputs = []
     pos = 0
     while pos < len(instructions):
         opt_code, immediate_modes = process_opt_code(instructions[pos])
@@ -97,9 +98,10 @@ def run_intcode(intcode_string, input_=None):
         elif opt_code == 2:
             instructions, pos = _instruction_2(instructions, pos, immediate_modes)
         elif opt_code == 3:
-            instructions, pos = _instruction_3(instructions, pos, input_)
+            instructions, pos = _instruction_3(instructions, pos, input_.pop())
         elif opt_code == 4:
             instructions, pos, output_ = _instruction_4(instructions, pos)
+            outputs.append(output_)
             print(output_)
         elif opt_code == 5:
             instructions, pos = _instruction_5(instructions, pos, immediate_modes)
@@ -109,4 +111,4 @@ def run_intcode(intcode_string, input_=None):
             instructions, pos = _instruction_7(instructions, pos, immediate_modes)
         elif opt_code == 8:
             instructions, pos = _instruction_8(instructions, pos, immediate_modes)
-    return instructions
+    return instructions, outputs

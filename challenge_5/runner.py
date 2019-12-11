@@ -7,5 +7,5 @@ with open("five.txt", "r") as ins:
         array.append(line.strip())
 program = array[0]
 
-run_intcode(program, input_=1)
-run_intcode(program, input_=5)
+run_intcode(program, input_=[1])
+run_intcode(program, input_=[5])
