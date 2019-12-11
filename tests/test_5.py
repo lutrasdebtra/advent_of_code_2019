@@ -12,4 +12,4 @@ from challenge_5 import run_intcode
     ]
 )
 def test_run_intcode(string, result):
-    assert ",".join([str(x) for x in run_intcode(string)[0]]) == result
+    assert ",".join([str(x) for x in run_intcode(string)]) == result
