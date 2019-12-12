@@ -1,7 +1,7 @@
 import networkx as nx
 
 
-def create_graph(path, directed=True):
+def _create_graph(path, directed=True):
     g = nx.read_edgelist(path, delimiter=')', create_using=(nx.DiGraph if directed else nx.Graph))
     if directed:
         return g.reverse()
@@ -9,7 +9,7 @@ def create_graph(path, directed=True):
 
 
 def count_simple_paths(path):
-    graph = create_graph(path)
+    graph = _create_graph(path)
     paths_count = 0
     for n in graph.nodes():
         paths = list(
@@ -22,7 +22,7 @@ def count_simple_paths(path):
 
 
 def shortest_path(path, source='YOU', dest='SAN'):
-    graph = create_graph(path, directed=False)
+    graph = _create_graph(path, directed=False)
     orbit_1 = list(nx.neighbors(graph, source))[0]
     orbit_2 = list(nx.neighbors(graph, dest))[0]
     # Count edges not nodes.
