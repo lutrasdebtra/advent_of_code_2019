@@ -7,7 +7,7 @@ def amplifier_chain(intcode_string, phase_sequence_string):
     while len(phase_sequence):
         phase_input = phase_sequence.pop(0)
         amplifier_input = amplifier_inputs.pop(0)
-        computer = IntCodeComputer(intcode_string, inputs=[amplifier_input, phase_input])
+        computer = IntCodeComputer(intcode_string, inputs=[phase_input, amplifier_input])
         computer.run_intcode()
         output = computer.outputs[0]
         amplifier_inputs.append(output)

@@ -92,7 +92,7 @@ class IntCodeComputer:
             elif opt_code == 2:
                 self._instruction_2(immediate_modes)
             elif opt_code == 3:
-                self._instruction_3(self.inputs.pop())
+                self._instruction_3(self.inputs.pop(0))
             elif opt_code == 4:
                 self._instruction_4()
             elif opt_code == 5:
