@@ -6,6 +6,9 @@ class IntCodeComputer:
         self.outputs = []
         self.pos = 0
 
+        self.is_halted = False
+
+
     def _instruction_1(self, immediate_modes):
         pos_1, pos_2, pos_3 = \
             self.instructions[self.pos + 1], self.instructions[self.pos + 2], self.instructions[self.pos + 3]
@@ -20,11 +23,11 @@ class IntCodeComputer:
                               self._get_instruction(pos_2, value_mode=(1 in immediate_modes))
         self.pos += 4
 
-    def _instruction_3(self, input_):
-        if input_:
+    def _instruction_3(self):
+        if len(self.inputs):
             pos_1 = self.instructions[self.pos + 1]
-            self.instructions[pos_1] = input_
-        self.pos += 2
+            self.instructions[pos_1] = self.inputs.pop(0)
+            self.pos += 2
 
     def _instruction_4(self):
         pos_1 = self.instructions[self.pos + 1]
@@ -86,13 +89,14 @@ class IntCodeComputer:
         while self.pos < len(self.instructions):
             opt_code, immediate_modes = self._process_opt_code(self.instructions[self.pos])
             if opt_code == 99:
+                self.is_halted = True
                 break
             if opt_code == 1:
                 self._instruction_1(immediate_modes)
             elif opt_code == 2:
                 self._instruction_2(immediate_modes)
             elif opt_code == 3:
-                self._instruction_3(self.inputs.pop(0))
+                self._instruction_3()
             elif opt_code == 4:
                 self._instruction_4()
             elif opt_code == 5:
