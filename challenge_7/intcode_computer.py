@@ -28,6 +28,8 @@ class IntCodeComputer:
             pos_1 = self.instructions[self.pos + 1]
             self.instructions[pos_1] = self.inputs.pop(0)
             self.pos += 2
+            return True
+        return False
 
     def _instruction_4(self):
         pos_1 = self.instructions[self.pos + 1]
@@ -96,7 +98,9 @@ class IntCodeComputer:
             elif opt_code == 2:
                 self._instruction_2(immediate_modes)
             elif opt_code == 3:
-                self._instruction_3()
+                result = self._instruction_3()
+                if not result:
+                    break
             elif opt_code == 4:
                 self._instruction_4()
             elif opt_code == 5:
