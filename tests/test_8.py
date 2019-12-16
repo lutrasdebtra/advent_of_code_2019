@@ -16,8 +16,8 @@ def test_corrupt_check(bits, width, height, checksum):
 @pytest.mark.parametrize(
     'bits, width, height, image',
     [
-        ('0222112222120004', 2, 2, '0114'),
+        ('0222112222120004', 2, 2, [' 1', '14']),
     ]
 )
 def test_render_image(bits, width, height, image):
-    assert render_image(bits, width, height) == image
+    assert list(render_image(bits, width, height)) == image

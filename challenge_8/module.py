@@ -29,7 +29,7 @@ def _determine_visible_pixel(stack):
 def render_image(bits, width, height):
     layers = _image_processor(bits, width, height)
     img = [_determine_visible_pixel(x) for x in list(map(list, zip(*layers)))]
-    img = [x if x == '1' else ' ' for x in img]
+    img = [x if x != '0' else ' ' for x in img]
     img = [img[i * width:(i + 1) * width] for i in range((len(img) + width - 1) // width)] # chunks
     for i in img:
-        print("".join(i))
+        yield "".join(i)

@@ -7,5 +7,5 @@ with open("eight.txt", "r") as ins:
 bits = array[0]
 
 print(corrupt_check(bits, 25, 6))
-render_image(bits, 25, 6)
+print(list(render_image(bits, 25, 6)))
 
