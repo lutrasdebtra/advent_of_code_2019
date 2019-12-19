@@ -74,22 +74,23 @@ class IntCodeComputer:
             self.instructions[pos_3] = 0
         self.pos += 4
 
-    def _instruction_9(self):
-        self.relative_base += self.instructions[self.pos + 1]
+    def _instruction_9(self, modes):
+        pos_1 = self.instructions[self.pos + 1]
+        self.relative_base += self._get_instruction(pos_1, modes, 0)
         self.pos += 2
 
     def _get_instruction(self, position, modes, order):
-        if modes[order] == self.VALUE_MODE:
-            return position
-        elif modes[order] == self.RELATIVE_MODE:
-            return self.instructions[position + self.relative_base]
+        if order in modes:
+            if modes[order] == self.VALUE_MODE:
+                return position
+            elif modes[order] == self.RELATIVE_MODE:
+                return self.instructions[position + self.relative_base]
         return self.instructions[position]
 
     def _process_opt_code(self, opt_code):
         opt_code_str = str(opt_code)
         modes = {}
         parameters_, mode_ = opt_code_str[:-2], int(opt_code_str[-2:])
-
         for i, v in enumerate(reversed(parameters_)):
             if int(v) == 1:
                 modes[i] = self.VALUE_MODE
@@ -124,4 +125,4 @@ class IntCodeComputer:
             elif opt_code == 8:
                 self._instruction_8(modes)
             elif opt_code == 9:
-                self._instruction_9()
+                self._instruction_9(modes)
