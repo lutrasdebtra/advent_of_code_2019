@@ -4,7 +4,7 @@ class IntCodeComputer:
     RELATIVE_MODE = 'relative'
 
     def __init__(self, intcode_string, inputs=None):
-        self.instructions = [int(x) for x in intcode_string.split(',')]
+        self.instructions = [int(x) for x in intcode_string.split(',')] + [0 for x in range(1000)]
         self.inputs = inputs if inputs else []
         self.outputs = []
         self.pos = 0
@@ -34,10 +34,10 @@ class IntCodeComputer:
             return True
         return False
 
-    def _instruction_4(self):
+    def _instruction_4(self, modes):
         pos_1 = self.instructions[self.pos + 1]
         self.pos += 2
-        self.outputs.append(self.instructions[pos_1])
+        self.outputs.append(self._get_instruction(pos_1, modes, 0))
         print(self.outputs)
 
     def _instruction_5(self, modes):
@@ -115,7 +115,7 @@ class IntCodeComputer:
                 if not result:
                     break
             elif opt_code == 4:
-                self._instruction_4()
+                self._instruction_4(modes)
             elif opt_code == 5:
                 self._instruction_5(modes)
             elif opt_code == 6:

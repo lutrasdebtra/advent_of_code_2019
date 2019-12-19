@@ -16,11 +16,11 @@ from challenge_9 import IntCodeComputer
         ),
         (
             '1102,34915192,34915192,7,4,7,99,0',
-            ''
+            '1219070632396864'
         )
     ]
 )
 def test_relative_intcode(program, result):
     c = IntCodeComputer(program)
     c.run_intcode()
-    assert c.outputs[0] == result
+    assert ",".join([str(x) for x in c.outputs]) == result
