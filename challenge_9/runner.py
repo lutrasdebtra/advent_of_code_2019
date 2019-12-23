@@ -8,4 +8,4 @@ program = array[0]
 
 c = IntCodeComputer(program, inputs=[1])
 c.run_intcode()
-print(c.outputs)
+print("".join(str(x) for x in c.outputs))
