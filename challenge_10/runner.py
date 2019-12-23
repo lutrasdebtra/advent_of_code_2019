@@ -3,7 +3,7 @@
 import math
 
 
-def get_monitoring_point():
+def get_monitoring_point(asteroid_coordinates):
     max_asteroids = 0
     best_x = best_y = 0
     for x, y in asteroid_coordinates:
