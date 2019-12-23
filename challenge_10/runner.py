@@ -1,10 +1,9 @@
 # https://github.com/kresimir-lukin/AdventOfCode2019/blob/master/day10.py
 
-import sys
 import math
 
 
-def get_monitoring_point(coordinates):
+def get_monitoring_point():
     max_asteroids = 0
     best_x = best_y = 0
     for x, y in asteroid_coordinates:
