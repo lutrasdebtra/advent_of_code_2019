@@ -4,7 +4,7 @@ class IntCodeComputer:
     RELATIVE_MODE = 'relative'
 
     def __init__(self, intcode_string, inputs=None):
-        self.instructions = [int(x) for x in intcode_string.split(',')] + [0 for x in range(1000)]
+        self.instructions = [int(x) for x in intcode_string.split(',')]
         self.inputs = inputs if inputs else []
         self.outputs = []
         self.pos = 0
@@ -88,10 +88,13 @@ class IntCodeComputer:
         return self.instructions[position]
 
     def _get_output_position(self, position, modes, order):
+        pos = position
         if order in modes:
             if modes[order] == self.RELATIVE_MODE:
-                return position + self.relative_base
-        return position
+                pos = position + self.relative_base
+        if pos > len(self.instructions):
+            self.instructions += [0 for _ in range(len(self.instructions) + pos + 1)]
+        return pos
 
     def _process_opt_code(self, opt_code):
         opt_code_str = str(opt_code)

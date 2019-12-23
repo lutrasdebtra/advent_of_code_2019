@@ -9,3 +9,7 @@ program = array[0]
 c = IntCodeComputer(program, inputs=[1])
 c.run_intcode()
 print("".join(str(x) for x in c.outputs))
+
+c = IntCodeComputer(program, inputs=[2])
+c.run_intcode()
+print("".join(str(x) for x in c.outputs))
