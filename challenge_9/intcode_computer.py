@@ -15,21 +15,21 @@ class IntCodeComputer:
     def _instruction_1(self, modes):
         pos_1, pos_2, pos_3 = \
             self.instructions[self.pos + 1], self.instructions[self.pos + 2], self.instructions[self.pos + 3]
-        self.instructions[pos_3] = self._get_instruction(pos_1, modes, 0) + \
+        self.instructions[self._get_output_position(pos_3, modes, 2)] = self._get_instruction(pos_1, modes, 0) + \
                               self._get_instruction(pos_2, modes, 1)
         self.pos += 4
 
     def _instruction_2(self, modes):
         pos_1, pos_2, pos_3 = \
             self.instructions[self.pos + 1], self.instructions[self.pos + 2], self.instructions[self.pos + 3]
-        self.instructions[pos_3] = self._get_instruction(pos_1, modes, 0) * \
+        self.instructions[self._get_output_position(pos_3, modes, 2)] = self._get_instruction(pos_1, modes, 0) * \
                               self._get_instruction(pos_2, modes, 1)
         self.pos += 4
 
-    def _instruction_3(self):
+    def _instruction_3(self, modes):
         if len(self.inputs):
             pos_1 = self.instructions[self.pos + 1]
-            self.instructions[pos_1] = self.inputs.pop(0)
+            self.instructions[self._get_output_position(pos_1, modes, 0)] = self.inputs.pop(0)
             self.pos += 2
             return True
         return False
@@ -59,9 +59,9 @@ class IntCodeComputer:
             self.instructions[self.pos + 1], self.instructions[self.pos + 2], self.instructions[self.pos + 3]
         if self._get_instruction(pos_1, modes, 0) < \
                 self._get_instruction(pos_2, modes, 1):
-            self.instructions[pos_3] = 1
+            self.instructions[self._get_output_position(pos_3, modes, 2)] = 1
         else:
-            self.instructions[pos_3] = 0
+            self.instructions[self._get_output_position(pos_3, modes, 2)] = 0
         self.pos += 4
 
     def _instruction_8(self, modes):
@@ -69,9 +69,9 @@ class IntCodeComputer:
             self.instructions[self.pos + 1], self.instructions[self.pos + 2], self.instructions[self.pos + 3]
         if self._get_instruction(pos_1, modes, 0) == \
                 self._get_instruction(pos_2, modes, 1):
-            self.instructions[pos_3] = 1
+            self.instructions[self._get_output_position(pos_3, modes, 2)] = 1
         else:
-            self.instructions[pos_3] = 0
+            self.instructions[self._get_output_position(pos_3, modes, 2)] = 0
         self.pos += 4
 
     def _instruction_9(self, modes):
@@ -86,6 +86,12 @@ class IntCodeComputer:
             elif modes[order] == self.RELATIVE_MODE:
                 return self.instructions[position + self.relative_base]
         return self.instructions[position]
+
+    def _get_output_position(self, position, modes, order):
+        if order in modes:
+            if modes[order] == self.RELATIVE_MODE:
+                return position + self.relative_base
+        return position
 
     def _process_opt_code(self, opt_code):
         opt_code_str = str(opt_code)
@@ -111,7 +117,7 @@ class IntCodeComputer:
             elif opt_code == 2:
                 self._instruction_2(modes)
             elif opt_code == 3:
-                result = self._instruction_3()
+                result = self._instruction_3(modes)
                 if not result:
                     break
             elif opt_code == 4:
