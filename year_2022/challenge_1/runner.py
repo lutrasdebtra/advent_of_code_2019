@@ -5,3 +5,4 @@ with open("one.txt", "r") as ins:
     for line in ins:
         calories.append(line)
     print(find_highest_calories(calories))
+    print(find_highest_calories(calories, elves_to_sum=3))

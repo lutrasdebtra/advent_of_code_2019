@@ -1,1 +1,1 @@
-from .module import find_highest_calories
+from .module import find_highest_calories, find_highest_calories_one_line
