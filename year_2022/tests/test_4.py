@@ -11,5 +11,5 @@ def test_get_subseqs(assignments):
     assert get_subseqs(assignments) == 2
 
 
-def test_badge_items(assignments):
+def test_get_overlaps(assignments):
     assert get_overlaps(assignments) == 4
