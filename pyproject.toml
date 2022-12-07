@@ -5,7 +5,7 @@ description = ""
 authors = ["Stuart Bradley <stuy.bradley@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "3.11"
+python = "^3.10"
 numpy = "1.23.5"
 networkx = "2.8.8"
 
