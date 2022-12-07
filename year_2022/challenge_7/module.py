@@ -10,7 +10,7 @@ def _generate_directory_structure(commands: List[Text]) -> nx.DiGraph:
         if command.startswith("$"):
             if command.startswith("$ cd"):
                 cd_param = command.split()[-1]
-                # Got to previous directory.
+                # Go to previous directory.
                 if cd_param == "..":
                     parent = list(G.predecessors(current_directory))
                     if parent:
