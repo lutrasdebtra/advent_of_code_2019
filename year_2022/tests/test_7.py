@@ -1,5 +1,5 @@
 import pytest
-from year_2022.challenge_7.module import directory_size
+from year_2022.challenge_7.module import directory_size, directory_to_delete
 
 
 @pytest.fixture
@@ -32,3 +32,7 @@ $ ls
 
 def test_file_size(commands):
     assert directory_size(commands) == 95437
+
+
+def test_directory_to_delete(commands):
+    assert directory_to_delete(commands) == 24933642
