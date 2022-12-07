@@ -42,7 +42,6 @@ def directory_size(commands: List[Text]) -> int:
     total_size = 0
     for node in [x for x in G.nodes() if G.out_degree(x) > 0]:
         size = G.nodes[node]["size"]
-        print(node, size)
         if size <= 100000:
             total_size += size
     return total_size
