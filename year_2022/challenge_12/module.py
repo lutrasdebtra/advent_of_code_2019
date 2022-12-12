@@ -8,9 +8,7 @@ def _calculate_edge_validity(node_1: str, node_2: str):
 
 
 def _node_name(x: int, y: int, l: str) -> str:
-    if l.isupper():
-        return l
-    return f"{l}-({x},{y})"
+    return l if l.isupper() else f"{l}-({x},{y})"
 
 
 def hill_climb(elevations: List[List[Text]], source: Optional[Text] = "S") -> int:
