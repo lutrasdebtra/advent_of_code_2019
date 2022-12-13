@@ -35,9 +35,9 @@ def _packet_order_compare(left: Any, right: Any) -> Optional[bool]:
 
 def packet_order(packets: List[Text]) -> int:
     sum_of_right_order = 0
-    for idx, l in enumerate([packets[i : i + 3] for i in range(0, len(packets), 3)]):
-        left, right, _ = l
-        left, right = eval(left), eval(right)
+    packets = [eval(p) for p in packets if p.strip() != ""]
+    for idx, l in enumerate([packets[i : i + 2] for i in range(0, len(packets), 2)]):
+        left, right = l
         if _packet_order_compare(left, right):
             sum_of_right_order += idx + 1
     return sum_of_right_order
@@ -48,6 +48,17 @@ def packet_sort(packets: List[Text]) -> int:
     packets = [eval(p) for p in packets if p.strip() != ""]
     packets.append(divider_1)
     packets.append(divider_2)
-    packets = sorted(packets, key=cmp_to_key(_packet_order_compare))
-    print(packets)
+
+    def make_comparator(f):
+        def compare(x, y):
+            if f(x, y):
+                return -1
+            elif f(y, x):
+                return 1
+            else:
+                return 0
+
+        return compare
+
+    packets = sorted(packets, key=cmp_to_key(make_comparator(_packet_order_compare)))
     return (packets.index(divider_1) + 1) * (packets.index(divider_2) + 1)
