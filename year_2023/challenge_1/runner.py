@@ -5,4 +5,8 @@ with open("one.txt", "r") as ins:
     for line in ins:
         calibration_document.append(line.strip())
     print(find_calibration_value(calibration_document=calibration_document))
-    print(find_calibration_value(calibration_document=calibration_document, replace_text_numbers=True))
+    print(
+        find_calibration_value(
+            calibration_document=calibration_document, replace_text_numbers=True
+        )
+    )
