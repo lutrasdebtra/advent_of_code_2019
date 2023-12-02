@@ -1,5 +1,4 @@
 from typing import List
-import re
 
 
 def _replace_text_numbers(calibration_document: List[str]) -> List[str]:
