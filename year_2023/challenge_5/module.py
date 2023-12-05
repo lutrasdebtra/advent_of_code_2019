@@ -3,7 +3,7 @@ import re
 from itertools import groupby, zip_longest
 
 
-def _parse_almanac_maps(almanac: List[str]) -> List[List[Tuple[int, int]]]:
+def _parse_almanac_maps(almanac: List[str]) -> List[List[List[Tuple[int, int]]]]:
     almanac_ranges = list(list() for _ in range(7))
     almanac.pop(0)  # Remove first empty line.
     almanac_maps = list(
