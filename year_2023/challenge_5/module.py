@@ -29,7 +29,6 @@ def _calculate_lowest_location(almanac: List[str], seeds: Iterable[int]) -> int:
     almanac_ranges = _parse_almanac_maps(almanac=almanac)
 
     for seed in seeds:
-        # Seed 14, soil 14, fertilizer 53, water 49, light 42, temperature 42, humidity 43, location 43
         loc = seed
         for almanac_range_group in almanac_ranges:
             for source_range, destination_range in almanac_range_group:
