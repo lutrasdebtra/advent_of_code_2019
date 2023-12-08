@@ -8,7 +8,7 @@ authors = ["Stuart Bradley <stuy.bradley@gmail.com>"]
 python = "^3.10"
 numpy = "^1.23.5"
 scipy = "^1.9.3"
-networkx = "^2.8.8"
+networkx = "^3.2.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.2.0"
