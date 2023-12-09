@@ -1,4 +1,4 @@
-from typing import List, Callable
+from typing import List
 import networkx as nx
 import re
 import math
