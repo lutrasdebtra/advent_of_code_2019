@@ -14,6 +14,7 @@ def calculate_extrapolated_values(report: List[str], reverse=False) -> int:
     else:
         operator_func = operator.add
         seq_idx = -1
+
     for history in report:
         stack = deque()
         sequence = history
@@ -22,7 +23,6 @@ def calculate_extrapolated_values(report: List[str], reverse=False) -> int:
             for a, b in pairwise(sequence):
                 new_sequence.append(b - a)
             stack.append(new_sequence)
-            print(new_sequence)
             sequence = new_sequence
 
         diff = 0
