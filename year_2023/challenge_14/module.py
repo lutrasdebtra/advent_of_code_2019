@@ -9,24 +9,28 @@ COMPASS_POSITIONS = {
 }
 
 COMPASS_ROCK_ORDER = {
+    # Get rocks in top to bottom, left to right order.
     "N": lambda rocks_x, rocks_y, G: (
         (x, y)
         for x in range(rocks_x)
         for y in range(rocks_y)
         if (x, y) in G and G.nodes[(x, y)].get("movable", False)
     ),
+    # Get rocks in bottom to top, left to right order.
     "S": lambda rocks_x, rocks_y, G: (
         (x, y)
         for x in reversed(range(rocks_x))
-        for y in reversed(range(rocks_y))
+        for y in range(rocks_y)
         if (x, y) in G and G.nodes[(x, y)].get("movable", False)
     ),
+    # Get rocks in top to bottom, right to left order.
     "E": lambda rocks_x, rocks_y, G: (
         (x, y)
         for y in reversed(range(rocks_y))
-        for x in reversed(range(rocks_x))
+        for x in range(rocks_x)
         if (x, y) in G and G.nodes[(x, y)].get("movable", False)
     ),
+    # Get rocks in top to bottom, left to right order.
     "W": lambda rocks_x, rocks_y, G: (
         (x, y)
         for y in range(rocks_y)
