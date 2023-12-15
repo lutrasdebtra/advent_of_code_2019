@@ -11,29 +11,28 @@ def run_hash_algorithm(init_sequence: str) -> int:
 def calculate_focal_lengths(init_sequence: str) -> int:
     boxes = {x: [] for x in range(256)}
     for instruction in init_sequence.split(","):
-        if "-" in instruction:
-            label = instruction.split("-")[0]
-            label_hash = run_hash_algorithm(init_sequence=label)
-            lens_to_remove = None
-            for lens in boxes[label_hash]:
-                if lens.startswith(label):
-                    lens_to_remove = lens
-                    break
-            if lens_to_remove is not None:
-                boxes[label_hash].remove(lens_to_remove)
-        elif "=" in instruction:
-            label, num = instruction.split("=")
-            label_hash = run_hash_algorithm(init_sequence=label)
-            new_lens = f"{label} {num}"
-            lens_to_replace_idx = None
-            for idx, lens in enumerate(boxes[label_hash]):
-                if lens.startswith(label):
-                    lens_to_replace_idx = idx
-                    break
-            if lens_to_replace_idx is not None:
-                boxes[label_hash][lens_to_replace_idx] = new_lens
-            else:
-                boxes[label_hash].append(new_lens)
+        match instruction.strip("-").split("="):
+            case [label, num]:
+                label_hash = run_hash_algorithm(init_sequence=label)
+                new_lens = f"{label} {num}"
+                lens_to_replace_idx = None
+                for idx, lens in enumerate(boxes[label_hash]):
+                    if lens.startswith(label):
+                        lens_to_replace_idx = idx
+                        break
+                if lens_to_replace_idx is not None:
+                    boxes[label_hash][lens_to_replace_idx] = new_lens
+                else:
+                    boxes[label_hash].append(new_lens)
+            case [label]:
+                label_hash = run_hash_algorithm(init_sequence=label)
+                lens_to_remove = None
+                for lens in boxes[label_hash]:
+                    if lens.startswith(label):
+                        lens_to_remove = lens
+                        break
+                if lens_to_remove is not None:
+                    boxes[label_hash].remove(lens_to_remove)
 
     return sum(
         sum(
