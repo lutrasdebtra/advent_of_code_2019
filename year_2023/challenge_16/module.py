@@ -54,10 +54,9 @@ def calculate_energy(
     mirrors = [list(m) for m in mirrors]
     beams = deque([starting_point])
     energised_set = {(starting_point[0], starting_point[1])}
+    energised_set_edges = set()
     cycle = 1
-    # Instead of doing cycle detection on compressed input, just run for enough steps that the full cycle at least once.
-    max_cycles = 40000000
-    while len(beams) > 0 and cycle < max_cycles:
+    while len(beams) > 0:
         cycle += 1
         x, y, direction = beams.popleft()
         if (x < 0 or x >= len(mirrors)) or (y < 0 or y >= len(mirrors[0])):
@@ -67,6 +66,9 @@ def calculate_energy(
         next_directions = SYMBOL_NEXT_DIRECTION[(current_symbol, direction)]
         for nxt_dir in next_directions:
             new_x, new_y = COMPASS_POSITIONS[nxt_dir](x, y)
+            if (x, y, new_x, new_y) in energised_set_edges:
+                continue
+            energised_set_edges.add((x, y, new_x, new_y))
             beams.append((new_x, new_y, COMPASS_OPPS[nxt_dir]))
     return len(energised_set)
 
