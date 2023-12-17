@@ -39,15 +39,6 @@ COMPASS_POSITIONS = {
 }
 
 
-def _print_mirror(mirrors: List[List[str]], energised_set: Set[Tuple[int, int]]):
-    print()
-    for x in range(len(mirrors)):
-        l = ""
-        for y in range(len(mirrors[x])):
-            l += "#" if (x, y) in energised_set else mirrors[x][y]
-        print(l)
-
-
 def calculate_energy(
     mirrors: List[str], starting_point: Tuple[int, int, str] = (0, 0, "W")
 ) -> int:
