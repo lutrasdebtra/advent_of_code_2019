@@ -1,6 +1,5 @@
 from typing import List
-from shapely.geometry import Polygon, Point
-from collections import deque
+from shapely.geometry import Polygon
 
 DIRECTION_MOVES = {"R": (0, 1), "L": (0, -1), "U": (-1, 0), "D": (1, 0)}
 
