@@ -4,5 +4,5 @@ with open("twenty.txt", "r") as ins:
     modules = []
     for line in ins:
         modules.append(line.strip())
-    # print(calculate_pulses(modules=modules))
+    print(calculate_pulses(modules=modules))
     print(calculate_presses_to_rx(modules=modules))
