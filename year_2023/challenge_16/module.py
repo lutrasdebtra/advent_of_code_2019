@@ -1,4 +1,4 @@
-from typing import List, Set, Tuple
+from typing import List, Tuple
 from collections import deque
 
 COMPASS_OPPS = {
